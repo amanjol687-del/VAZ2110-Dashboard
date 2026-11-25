@@ -1,0 +1,17 @@
+APK ҚҰРАСТЫРУ — ТЕК iPHONE АРҚЫЛЫ
+
+Бұл бума дайын APK емес, APK құрастыратын Android Studio жобасы.
+Жобада GitHub Actions автоматты құрастыру файлы қосылған.
+
+1. iPhone-да Safari арқылы https://github.com сайтына кіріп, аккаунт ашыңыз/кіріңіз.
+2. New repository басып, атауын VAZ2110-Dashboard деп қойыңыз. Public немесе Private таңдауға болады.
+3. Осы ZIP архивті iPhone Files қолданбасында ашып, ішіндегі VAZ2110_Full_Dashboard бумасының файлдарын GitHub репозиторийіне жүктеңіз. Репозиторийдің түбірінде app, build.gradle, settings.gradle және .github бумалары тұруы керек.
+4. GitHub репозиторийінде Actions бөліміне кіріңіз.
+5. “Build VAZ 2110 Dashboard APK” workflow-ын ашып, Run workflow басыңыз.
+6. Құрастыру біткен соң сәтті орындалған workflow ішінен Artifacts бөліміндегі VAZ-2110-Dashboard-APK файлын жүктеңіз.
+7. ZIP ішіндегі app-debug.apk файлын магнитолаға USB флешкамен немесе браузер арқылы жеткізіп орнатыңыз.
+
+Магнитола сипаттамасы: ARMv7 / 32-bit, 1280x720, 4 GB RAM, Android 15 деп көрсетілген.
+Қолданба minSdk 23 және targetSdk 28 параметрлерімен жасалған. Нақты орнатылуы магнитоланың Android жүйесінің шынайы нұсқасы мен өндіруші шектеулеріне байланысты.
+
+Ескерту: Android-тағы “Android 15” жазуының дұрыстығын Settings > About device ішіндегі Android version жолынан растаған жөн. Бұл қолданба Home Launcher ретінде таңдалса ғана HOME батырмасынан ашылады.
