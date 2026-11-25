@@ -41,6 +41,12 @@ jobs:
                   p.write_text(s)
                   print("Updated:", p)
           PY
+                - name: Check JVM settings
+        run: |
+          echo "===== BUILD.GRADLE ====="
+          cat source/VAZ2110_Full_Dashboard/app/build.gradle
+          echo "===== ALL JVM TARGETS ====="
+          grep -R "jvmTarget\|VERSION_1_8\|VERSION_17" source/VAZ2110_Full_Dashboard
       - name: Build APK
         run: |
           cd source/VAZ2110_Full_Dashboard
