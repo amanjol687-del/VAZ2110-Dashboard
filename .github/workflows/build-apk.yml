@@ -27,7 +27,20 @@ jobs:
           ZIP_FILE=$(find . -maxdepth 1 -name '*.zip' | head -n 1)
           test -n "$ZIP_FILE"
           unzip -q "$ZIP_FILE" -d source
+      - name: Fix JVM target
+        run: |
+          find source -type f \( -name "build.gradle" -o -name "build.gradle.kts" \) -print
+          python3 - <<'PY'
+          from pathlib import Path
 
+          for p in Path("source").rglob("build.gradle"):
+              s = p.read_text()
+              if "kotlinOptions" in s:
+                  s = s.replace("jvmTarget = '17'", "jvmTarget = '1.8'")
+                  s = s.replace('jvmTarget = "17"', 'jvmTarget = "1.8"')
+                  p.write_text(s)
+                  print("Updated:", p)
+          PY
       - name: Build APK
         run: |
           cd source/VAZ2110_Full_Dashboard
