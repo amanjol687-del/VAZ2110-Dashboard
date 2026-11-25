@@ -1,0 +1,40 @@
+name: Build VAZ 2110 APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Extract project
+        run: |
+          ZIP_FILE=$(find . -maxdepth 1 -name '*.zip' | head -n 1)
+          test -n "$ZIP_FILE"
+          unzip -q "$ZIP_FILE" -d source
+
+      - name: Build APK
+        run: |
+          cd source/VAZ2110_Full_Dashboard
+          gradle assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: VAZ2110-Dashboard-APK
+          path: source/VAZ2110_Full_Dashboard/app/build/outputs/apk/debug/app-debug.apk
